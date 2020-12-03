@@ -3,6 +3,7 @@
 //
 
 #include "main.h"
+///comentario
 
 bool testFileIsOpened(ifstream *file_to_test){
     if (file_to_test->is_open()){
