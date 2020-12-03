@@ -3,7 +3,6 @@
 //
 
 #include "main.h"
-///comentario
 
 bool testFileIsOpened(ifstream *file_to_test){
     if (file_to_test->is_open()){
@@ -18,7 +17,7 @@ pair <char, int> returnTypePPM(ifstream *file_to_read){
         string type_ppm;
         getline(*file_to_read, type_ppm);
         pair <char, int> sucess;
-//        sucess.first = 
+//        sucess.first =
 //        cout << "The PPM type was read.\n";
         return sucess;
     } else {
