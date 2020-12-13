@@ -101,7 +101,7 @@ int maxValue(uint *array_frequency){
     return index_max;
 }
 
-string *organizeArraySymbols(uint *array_frequency, string *array_symbols){
+void organizeArraySymbols(uint *array_frequency, string *array_symbols, string * array_symbols_copy){
     uint array_frequency_copy[11];
 
 //    for (int i = 0; i < 11; ++i) {
@@ -128,7 +128,7 @@ string *organizeArraySymbols(uint *array_frequency, string *array_symbols){
 //        swapString(&array_symbols[i], &array_symbols[index_max]);
 //        cout << " symbol_dps: " << array_symbols[index_max] << endl;
     }
-    string array_symbols_copy[11];
+
     for (int i = 0; i < 11; ++i) {
         array_symbols_copy[array_control[i].first] = array_symbols[i];
         cout << array_control[i].first << "-" << array_control[i].second << "-> " << array_symbols[i] << endl;
@@ -137,7 +137,8 @@ string *organizeArraySymbols(uint *array_frequency, string *array_symbols){
     for (int i = 0; i < 11; ++i) {
         cout << array_symbols_copy[i] << "; ";
     }
-    return array_symbols_copy;
+
+    cout<<"\n\n"<<array_symbols_copy[0]<<"\n\n";
 }
 
 void splitTypePPM(pair <char, int> *name_type, string type){
@@ -182,12 +183,13 @@ int write_bit(char *bitstring,ofstream* fileToWrite, string bits_to_write, int b
     return  bit_string_index;
 }
 
-void write_on_file(ifstream *ppm_file, string *array_of_symbols ){
+void write_on_file( string *array_of_symbols ){
 
     string name_file_to_open;
     name_file_to_open = "teste.ppm";
     
-    ppm_file->open("../"+name_file_to_open);
+    ifstream ppm_file;
+    ppm_file.open(name_file_to_open);
 
     ofstream fileToWrite;
     fileToWrite.open("compressed_file.txt");
@@ -196,24 +198,31 @@ void write_on_file(ifstream *ppm_file, string *array_of_symbols ){
     char item;
     int item_as_number;
     int bit_string_index=0;
-    if( ppm_file->is_open()){
-        ppm_file->get(item);
+    if( ppm_file.is_open()){
+        ppm_file.get(item);
 
-        while (ppm_file->get(item)){
+        while (ppm_file.get(item)){
 
             item_as_number = (int)item - 48;
             
             if ((int)item == 32) {
+                //cout<<array_of_symbols[10]<<" ";
                 bit_string_index=write_bit(&bitstring,&fileToWrite, array_of_symbols[10], bit_string_index);
             } else if ((int)item == 10) {
+                //cout<<array_of_symbols[10]<<" ";
                 bit_string_index=write_bit(&bitstring,&fileToWrite, array_of_symbols[10], bit_string_index);
             
             } else {
+                //cout<<array_of_symbols[10]<<" ";
                 bit_string_index=write_bit(&bitstring,&fileToWrite, array_of_symbols[item_as_number], bit_string_index);
             }
         }
 
 
+    }else{
+
+        cout<<"\n"<<array_of_symbols[10]<<" \n";
+        cout<< "errorrr\n\n";
     }
 
 
@@ -254,7 +263,8 @@ int main() {
         for (int i = 0; i < 4*11; ++i) {
 //           cout << "H" << array_symbols_to_represent[i];
         }
-        string *array_of_symbols_CORRECT = organizeArraySymbols(array_frequency_items, array_symbols_to_represent);
+        string array_of_symbols_CORRECT[11];
+        organizeArraySymbols(array_frequency_items, array_symbols_to_represent,array_of_symbols_CORRECT);
 
         ppm_file.open("../"+name_file_to_open);
         if (testFileIsOpened(&ppm_file)){
@@ -264,7 +274,9 @@ int main() {
             }
 //            writePPMClassInFile(the_image, array_of_symbols_CORRECT);
         }
-    write_on_file(&ppm_file,array_of_symbols_CORRECT);
+        
+        cout<<"\n"<<array_of_symbols_CORRECT[0]<<" \n";
+        write_on_file(array_of_symbols_CORRECT);
     } else {
         cout << "ERROR\n";
     }
