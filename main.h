@@ -30,7 +30,7 @@ string *organizeArraySymbols(uint *array_frequency, string *array_symbols);
 
 void splitTypePPM(pair <char, int> *name_type, string type);
 
-void writePPMClassInFile(ppm *the_image, string *array_symbols);
+void writePPMClassInFile( PPM *the_image, string *array_symbols);
 
 
 #endif //TRABALHO2_OAD_20201_MAIN_H
