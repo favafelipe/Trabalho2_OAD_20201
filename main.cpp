@@ -192,7 +192,7 @@ void write_on_file( string *array_of_symbols ){
     ppm_file.open(name_file_to_open);
 
     ofstream fileToWrite;
-    fileToWrite.open("compressed_file.txt");
+    fileToWrite.open("compressed_file.bin");
 
     char bitstring;
     char item;
@@ -221,7 +221,7 @@ void write_on_file( string *array_of_symbols ){
 
     }else{
 
-        cout<<"\n"<<array_of_symbols[10]<<" \n";
+        //cout<<"\n"<<array_of_symbols[10]<<" \n";
         cout<< "errorrr\n\n";
     }
 
