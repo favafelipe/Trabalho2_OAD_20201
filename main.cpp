@@ -12,54 +12,6 @@ bool testFileIsOpened(ifstream *file_to_test){
     }
 }
 
-pair <char, int> returnTypePPM(ifstream *file_to_read){
-    if (file_to_read->is_open()){
-        string type_ppm;
-        getline(*file_to_read, type_ppm);
-        pair <char, int> sucess;///*****
-//        sucess.first = type_ppm[0]; 
-//        sucess.second = type_ppm[1];
-//        cout << "The PPM type was read.\n";
-        return sucess;
-    } else {
-        cout << "Error reading the type.\n";
-        pair <char, int> error;
-        error.first = 'e';
-        error.second = -1;
-        return error;
-    }
-}
-
-void splitDimensions(int *array_dimensions, string dimensions){
-    string::size_type size_type_string;
-    array_dimensions[0] = stoi(dimensions, &size_type_string);
-    array_dimensions[1] = stoi(dimensions.substr(size_type_string), &size_type_string);
-}
-
-void returnDimensionsImage(ifstream *file_to_read, int *array_dimensions){
-    if (testFileIsOpened(file_to_read)){
-        string dimensions;
-        getline(*file_to_read, dimensions);
-//        cout << "Dimensions read.\n";
-        splitDimensions(array_dimensions, dimensions);
-    } else {
-        cout << "Error reading the image dimensions.\n";
-    }
-}
-
-int returnMaxColor(ifstream *file_to_read){
-    if (testFileIsOpened(file_to_read)){
-        string max_color;
-        getline(*file_to_read, max_color);
-//        cout << "Max color value read.\n";
-        string::size_type size_type_string;
-        return stoi(max_color, &size_type_string);
-    } else {
-        cout << "Error reading the max color.\n";
-        return -1;
-    }
-}
-
 void readFrequency(ifstream *file_to_read, uint *array_frequency_items){
  //   9
     if (testFileIsOpened(file_to_read) /*file_to_read->isOpen()*/){
@@ -189,7 +141,8 @@ void write_on_file( string *array_of_symbols ){
     name_file_to_open = "teste.ppm";
     
     ifstream ppm_file;
-    ppm_file.open(name_file_to_open);
+//    ppm_file.open(name_file_to_open);
+    ppm_file.open("../"+name_file_to_open);
 
     ofstream fileToWrite;
     fileToWrite.open("compressed_file.bin");
@@ -233,28 +186,29 @@ int main() {
 
     string name_file_to_open;
     name_file_to_open = "teste.ppm";
-    ifstream ppm_file (name_file_to_open);
+//    ifstream ppm_file (name_file_to_open);
+    ifstream ppm_file ("../"+name_file_to_open);
 
     if (testFileIsOpened(&ppm_file)){
-        PPM *the_image = new PPM;
-        the_image->setTypePpm(returnTypePPM(&ppm_file));
+//        PPM *the_image = new PPM;
+//        the_image->setTypePpm(returnTypePPM(&ppm_file));
 
 //        cout << "PPM type = " << the_image->getTypePpm() << "\n";
 
         //int img_dimensions[2];
-        int *img_dimensions = (int*)malloc(sizeof(int) * 2);
-        returnDimensionsImage(&ppm_file, img_dimensions);
+//        int *img_dimensions = (int*)malloc(sizeof(int) * 2);
+//        returnDimensionsImage(&ppm_file, img_dimensions);
 
-        the_image->setWidth(img_dimensions[0]);
-        the_image->setHeight(img_dimensions[1]);
+//        the_image->setWidth(img_dimensions[0]);
+//        the_image->setHeight(img_dimensions[1]);
 
 //        cout << "Width = " << the_image->getWidth() << "\n";
 //        cout << "Height = " << the_image->getHeight() << "\n";
 
-        the_image->setMaxColorNumber(returnMaxColor(&ppm_file));
+//        the_image->setMaxColorNumber(returnMaxColor(&ppm_file));
 //        cout << "Max color value: " << the_image->getMaxColorValue() << "\n";
-
         uint array_frequency_items[11]/*={0}*/;
+
         readFrequency(&ppm_file, array_frequency_items);
         ppm_file.close();
 

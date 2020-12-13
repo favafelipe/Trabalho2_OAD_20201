@@ -82,18 +82,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/doga/Documents/GIT/Trabalho2_OAD_20201/PPM.cpp">
-			<Option target="Trabalho2_OAD_20201"/>
-		</Unit>
-		<Unit filename="/home/doga/Documents/GIT/Trabalho2_OAD_20201/PPM.h">
-			<Option target="Trabalho2_OAD_20201"/>
-		</Unit>
-		<Unit filename="/home/doga/Documents/GIT/Trabalho2_OAD_20201/Pixel.cpp">
-			<Option target="Trabalho2_OAD_20201"/>
-		</Unit>
-		<Unit filename="/home/doga/Documents/GIT/Trabalho2_OAD_20201/Pixel.h">
-			<Option target="Trabalho2_OAD_20201"/>
-		</Unit>
 		<Unit filename="/home/doga/Documents/GIT/Trabalho2_OAD_20201/main.cpp">
 			<Option target="Trabalho2_OAD_20201"/>
 		</Unit>
