@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/doga/Documents/GIT/Trabalho2_OAD_20201/decompress.cpp">
+			<Option target="Trabalho2_OAD_20201"/>
+		</Unit>
+		<Unit filename="/home/doga/Documents/GIT/Trabalho2_OAD_20201/decompress.h">
+			<Option target="Trabalho2_OAD_20201"/>
+		</Unit>
 		<Unit filename="/home/doga/Documents/GIT/Trabalho2_OAD_20201/main.cpp">
 			<Option target="Trabalho2_OAD_20201"/>
 		</Unit>

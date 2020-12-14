@@ -106,9 +106,9 @@ void write_on_file(string *name_file_to_open, string *array_of_symbols ){
     if( ppm_file.is_open()){
         ppm_file.get(item); // read p and not compress it
         for(int i=0;i<10;i++){
-            file_to_write << i << "=" << array_of_symbols[i] << " ";
+            file_to_write << array_of_symbols[i] << " ";
         }
-        file_to_write << " =" << array_of_symbols[10] << endl;
+        file_to_write << array_of_symbols[10] << endl;
         while (ppm_file.get(item)){
             item_as_number = (int)item - 48;
             
@@ -118,8 +118,9 @@ void write_on_file(string *name_file_to_open, string *array_of_symbols ){
                 bit_string_index = write_bit(&bitstring, &file_to_write, array_of_symbols[item_as_number], bit_string_index);
             }
         }
-        if (bit_string_index < 8){
+        if (bit_string_index < 8 && bit_string_index != 0){
             file_to_write << bitstring;
+//            cout << bit_string_index;
             for (int l = 0; l < 8; l++)
             {
                 printf("%d", getBit(&bitstring, l));
@@ -133,7 +134,6 @@ void write_on_file(string *name_file_to_open, string *array_of_symbols ){
 }
 
 int main() {
-
     string name_file_to_open;
     name_file_to_open = "teste.ppm";
     ifstream ppm_file ("../"+name_file_to_open);
