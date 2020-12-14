@@ -64,19 +64,27 @@ void toggle(char *bitString, int index){
 
 }
 
+int getBit(const char *bitString, int index)
+{
+    return 1 & (bitString[index / 8] >> (index % 8));
+}
+
 int write_bit(char *bitstring, ofstream* file_to_write, string bits_to_write, int bit_string_index){
 
     for(char & c : bits_to_write) { // foreach
-        if(c==1){
+        if(c == '1'){
             toggle(bitstring,bit_string_index);
         }
-
         bit_string_index++;
         if(bit_string_index==7){
             (*file_to_write)<<(*bitstring);
-
-            bitstring[0]=0;
-            bit_string_index=0;
+            for (int l = 0; l < 8; l++)
+            {
+                printf("%d", getBit(bitstring, l));
+            }
+            cout << endl;
+            bitstring[0] = 0;
+            bit_string_index = 0;
         }
     }
 
@@ -91,23 +99,33 @@ void write_on_file(string *name_file_to_open, string *array_of_symbols ){
     ofstream file_to_write;
     file_to_write.open("compressed_file.bin");
 
-    vector <char> bitstring = {0};
+    char bitstring = 0;
     char item;
     int item_as_number;
     int bit_string_index = 0;
     if( ppm_file.is_open()){
         ppm_file.get(item); // read p and not compress it
-
+        for(int i=0;i<10;i++){
+            file_to_write << i << "=" << array_of_symbols[i] << " ";
+        }
+        file_to_write << " =" << array_of_symbols[10] << endl;
         while (ppm_file.get(item)){
             item_as_number = (int)item - 48;
             
             if (((int)item == 32) || ((int)item == 10)) {
-//                bit_string_index = write_bit(&bitstring, &file_to_write,array_of_symbols[10], bit_string_index);
+                bit_string_index = write_bit(&bitstring, &file_to_write,array_of_symbols[10], bit_string_index);
             } else {
-//                bit_string_index = write_bit(&bitstring, &file_to_write, array_of_symbols[item_as_number], bit_string_index);
+                bit_string_index = write_bit(&bitstring, &file_to_write, array_of_symbols[item_as_number], bit_string_index);
             }
         }
-
+        if (bit_string_index < 8){
+            file_to_write << bitstring;
+            for (int l = 0; l < 8; l++)
+            {
+                printf("%d", getBit(&bitstring, l));
+            }
+            cout << endl;
+        }
     }else{
         cout<< "Error writing bits.\n";
     }
@@ -131,7 +149,7 @@ int main() {
         string array_of_symbols_CORRECT[11];
         organizeArraySymbols(array_frequency_items, array_symbols_to_represent, array_of_symbols_CORRECT);
 
-//        write_on_file(&name_file_to_open, array_of_symbols_CORRECT);
+        write_on_file(&name_file_to_open, array_of_symbols_CORRECT);
     } else {
         cout << "ERROR\n";
     }
