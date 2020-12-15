@@ -105,10 +105,18 @@ void write_on_file(string *name_file_to_open, string *array_of_symbols ){
     int bit_string_index = 0;
     if( ppm_file.is_open()){
         ppm_file.get(item); // read p and not compress it
+<<<<<<< Updated upstream
         for(int i=0;i<10;i++){
             file_to_write << array_of_symbols[i] << " ";
         }
         file_to_write << array_of_symbols[10] << endl;
+=======
+
+        for(int i=0;i<10;i++){
+            fileToWrite<<i<<"="<<array_of_symbols[i]<<" ";
+        }
+        fileToWrite<< " ="<<array_of_symbols[10]<<endl;
+>>>>>>> Stashed changes
         while (ppm_file.get(item)){
             item_as_number = (int)item - 48;
             
