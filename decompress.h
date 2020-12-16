@@ -8,11 +8,12 @@
 #include <fstream>
 #include <string>
 #include <map>
+#include <vector>
 
 using namespace std;
-    
-    int getBit(char *bit_string, int index);
-    
-    void decompressFunction();
+
+int getBit(const char *bitString, int index);
+
+void decompressFunction();
 
 #endif //TRABALHO2_OAD_20201_DECOMPRESS_H

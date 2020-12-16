@@ -4,9 +4,8 @@
 
 #include "decompress.h"
 
-int getBit(char *bit_string, int index){
-
-    return 1 & (bit_string[index / 8] >> (index % 8));
+int getBit(const char *bitString, int index){
+    return 1 & (bitString[index / 8] >> (index % 8));
 }
 
 void decompressFunction(){

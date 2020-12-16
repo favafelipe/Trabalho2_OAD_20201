@@ -3,4 +3,4 @@ project(Trabalho2_OAD_20201)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Trabalho2_OAD_20201 main.cpp main.h decompress.cpp decompress.h)
+add_executable(Trabalho2_OAD_20201 main.cpp main.h decompress.cpp decompress.h compress.cpp compress.h)
