@@ -80,9 +80,9 @@ int write_bit(char *bitstring, ofstream* file_to_write, string bits_to_write, in
             (*file_to_write)<<(*bitstring);
             for (int l = 0; l < 8; l++)
             {
-                printf("%d", getBit(bitstring, l));
+                //printf("%d", getBit(bitstring, l));
             }
-            cout << endl;
+            //cout << endl;
             bitstring[0] = 0;
             bit_string_index = 0;
         }
@@ -94,7 +94,7 @@ int write_bit(char *bitstring, ofstream* file_to_write, string bits_to_write, in
 void write_on_file(string *name_file_to_open, string *array_of_symbols ){
     
     ifstream ppm_file;
-    ppm_file.open("../" + *name_file_to_open);
+    ppm_file.open(*name_file_to_open);
 
     ofstream file_to_write;
     file_to_write.open("compressed_file.bin");
@@ -103,20 +103,13 @@ void write_on_file(string *name_file_to_open, string *array_of_symbols ){
     char item;
     int item_as_number;
     int bit_string_index = 0;
+    
     if( ppm_file.is_open()){
         ppm_file.get(item); // read p and not compress it
-<<<<<<< Updated upstream
         for(int i=0;i<10;i++){
             file_to_write << array_of_symbols[i] << " ";
         }
         file_to_write << array_of_symbols[10] << endl;
-=======
-
-        for(int i=0;i<10;i++){
-            fileToWrite<<i<<"="<<array_of_symbols[i]<<" ";
-        }
-        fileToWrite<< " ="<<array_of_symbols[10]<<endl;
->>>>>>> Stashed changes
         while (ppm_file.get(item)){
             item_as_number = (int)item - 48;
             
@@ -131,20 +124,24 @@ void write_on_file(string *name_file_to_open, string *array_of_symbols ){
 //            cout << bit_string_index;
             for (int l = 0; l < 8; l++)
             {
-                printf("%d", getBit(&bitstring, l));
+                //printf("%d", getBit(&bitstring, l));
             }
             cout << endl;
         }
+
+        file_to_write.close();
+        ppm_file.close();
     }else{
         cout<< "Error writing bits.\n";
     }
+
 
 }
 
 int main() {
     string name_file_to_open;
     name_file_to_open = "teste.ppm";
-    ifstream ppm_file ("../"+name_file_to_open);
+    ifstream ppm_file (name_file_to_open);
 
     if (ppm_file.is_open()){
         unsigned long long int array_frequency_items[11] = {0};
@@ -158,6 +155,12 @@ int main() {
         organizeArraySymbols(array_frequency_items, array_symbols_to_represent, array_of_symbols_CORRECT);
 
         write_on_file(&name_file_to_open, array_of_symbols_CORRECT);
+
+        ppm_file.close();
+
+        cout<< "\nDecompressão\n";
+
+        decompressFunction();
     } else {
         cout << "ERROR\n";
     }

@@ -9,6 +9,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "decompress.h"
 
 using namespace std;
 
